@@ -7,6 +7,7 @@ import { authClient } from "@/lib/auth-client";
 
 const SignOutButton = () => {
   const router = useRouter();
+
   return (
     <Button
       onClick={() =>
