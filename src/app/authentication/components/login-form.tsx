@@ -67,13 +67,13 @@ const LoginForm = () => {
     );
   };
 
-  /*const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async () => {
     await authClient.signIn.social({
       provider: "google",
       callbackURL: "/dashboard",
       scopes: ["email", "profile"],
     });
-  };*/
+  };
 
   return (
     <Card>
@@ -135,7 +135,7 @@ const LoginForm = () => {
                 variant="outline"
                 className="w-full"
                 type="button"
-                onClick={() => {} /*handleGoogleLogin*/}
+                onClick={handleGoogleLogin}
               >
                 <svg viewBox="0 0 24 24" className="mr-2 h-4 w-4">
                   <path
