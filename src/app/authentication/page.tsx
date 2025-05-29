@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { auth } from "@/lib/auth";
 
-import LoginForm from "./components/login-form";
-import SignupForm from "./components/signup-form";
+import LoginForm from "./_components/login-form";
+import SignupForm from "./_components/signup-form";
 
 const Login = async () => {
   const session = await auth.api.getSession({
