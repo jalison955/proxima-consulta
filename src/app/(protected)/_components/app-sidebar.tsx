@@ -83,6 +83,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
+                  {/* isActive recebe true somente na pagina ativa */}
                   <SidebarMenuButton asChild isActive={pathname === item.url}>
                     <Link href={item.url}>
                       <item.icon />
@@ -106,8 +107,7 @@ export function AppSidebar() {
                   </Avatar>
                   <div>
                     <p className="text-sm">
-                      Clínica Saúde
-                      {/*session.data?.user?.clinic?.name*/}
+                      {session.data?.user?.clinic?.name}
                     </p>
                     <p className="text-muted-foreground text-sm">
                       {session.data?.user.email}
