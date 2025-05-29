@@ -20,11 +20,13 @@ export const upsertDoctor = actionClient
     const availableFromTime = parsedInput.availableFromTime; // 15:30:00
     const availableToTime = parsedInput.availableToTime; // 16:00:00
 
+    //tratar o horario para UTC: assim independe do fuso do local, basta calcular as diferenças de fuso
     const availableFromTimeUTC = dayjs()
       .set("hour", parseInt(availableFromTime.split(":")[0]))
       .set("minute", parseInt(availableFromTime.split(":")[1]))
       .set("second", parseInt(availableFromTime.split(":")[2]))
       .utc();
+
     const availableToTimeUTC = dayjs()
       .set("hour", parseInt(availableToTime.split(":")[0]))
       .set("minute", parseInt(availableToTime.split(":")[1]))
@@ -40,6 +42,7 @@ export const upsertDoctor = actionClient
     if (!session?.user.clinic?.id) {
       throw new Error("Clinic not found");
     }
+
     await db
       .insert(doctorsTable)
       .values({
@@ -50,6 +53,7 @@ export const upsertDoctor = actionClient
         availableToTime: availableToTimeUTC.format("HH:mm:ss"),
       })
       .onConflictDoUpdate({
+        //se o doctor já existir, atualiza os dados
         target: [doctorsTable.id],
         set: {
           ...parsedInput,
@@ -57,5 +61,6 @@ export const upsertDoctor = actionClient
           availableToTime: availableToTimeUTC.format("HH:mm:ss"),
         },
       });
+
     revalidatePath("/doctors");
   });
